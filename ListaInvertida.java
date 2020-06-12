@@ -97,7 +97,6 @@ class Dicionario{
      */
     public long read(String termo){
         long end = -1;
-        termo = termo.toLowerCase();
 
         try{
             arq.seek(0);
@@ -241,6 +240,10 @@ public class ListaInvertida {
 
         // Atualizar/criar os registros dos termos:
         for(String termo : nome.split(" ")){
+            // Remover os acentos do termo:
+            termo = termo.toLowerCase();
+            termo.replaceAll("[áàâã]","a").replaceAll("[éèêẽ]","e").replaceAll("[éèêẽ]","e").replaceAll("[íìîĩ]","i").replaceAll("[óòôõ]","o").replaceAll("[úùûũ]","u").replace("ç","c");
+
             long endereco = dicionario.read(termo);
 
             if(endereco != -1){ // Se o termo ja existe:
